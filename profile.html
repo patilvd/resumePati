@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PATI.LVD - Artist Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Outfit', sans-serif;
+      background: url('https://media.discordapp.net/attachments/1119270754551345245/1401685005058445519/image.png?ex=68912c63&is=688fdae3&hm=dea6ee87cf9aa6a6d6d94e167a0dc02a88de20cd7150c4176e284fa1ba7be8f5&=&format=webp&quality=lossless') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.5);
+      z-index: 0;
+    }
+
+    .profile-container {
+      position: relative;
+      z-index: 1;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .profile-img {
+      width: 650px;
+      height: 650px;
+      object-fit: contain;
+      animation: float 4s ease-in-out infinite;
+      border-radius: 0;
+      border: none;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    h1 {
+      margin-top: 30px;
+      font-weight: 600;
+      font-size: 2.5rem;
+      color: #3a3a3a;
+      letter-spacing: 1.2px;
+    }
+
+    p {
+      margin-top: 10px;
+      font-size: 1.1rem;
+      color: #555;
+      max-width: 600px;
+    }
+
+    .btn-back {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 28px;
+      background: rgba(29, 177, 61, 0.8);
+      color: #ffffff;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 30px;
+      box-shadow: 0 6px 15px rgba(255, 255, 255, 0.5);
+      transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+
+    .btn-back:hover {
+      background: rgb(255, 255, 255);
+      color: #4da84d;
+      box-shadow: 0 8px 25px rgba(127, 167, 127, 0.7);
+    }
+
+    @media (max-width: 600px) {
+      .profile-img {
+        width: 200px;
+        height: 200px;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      p {
+        font-size: 1rem;
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="profile-container">
+    <img class="profile-img" src="https://media.discordapp.net/attachments/1119270754551345245/1401692908662554744/patiwat_dujjanuthas.png.png?ex=689133bf&is=688fe23f&hm=2031d588201525b62a88ef9fcde0f67eab2c92b12c958f822999a89f37f3855a&=&format=webp&quality=lossless&width=690&height=976" alt="Profile Image">
+    <h1>PATI.LVD</h1>
+    <p></p>
+    <a href="index.html" class="btn-back">← Home</a>
+  </div>
+
+</body>
+</html>

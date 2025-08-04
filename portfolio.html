@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PATI.LVD - Artist Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    body {
+      background: url('https://media.discordapp.net/attachments/1119270754551345245/1401685005058445519/image.png?ex=68912c63&is=688fdae3&hm=dea6ee87cf9aa6a6d6d94e167a0dc02a88de20cd7150c4176e284fa1ba7be8f5&=&format=webp&quality=lossless') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.5); /* จางลงแบบไม่เบลอ */
+      z-index: 0;
+    }
+
+    .back-btn {
+      position: relative;
+      z-index: 1;
+      margin: 30px auto 10px auto;
+      display: block;
+      max-width: 1200px;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: 600;
+      color: white;
+      background: linear-gradient(45deg, #7fa77f, #a4c18c);
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(224, 228, 224, 0.4);
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      width: 120px;
+      user-select: none;
+    }
+    .back-btn:hover {
+      background: linear-gradient(45deg, #4f9b4d, #88b177);
+      box-shadow: 0 6px 18px rgba(250, 250, 250, 0.6);
+      transform: translateY(-2px) scale(1.05);
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      background: #ffffffdd;
+      border-radius: 24px;
+      width: 300px;
+      padding: 30px 20px;
+      text-align: center;
+      margin: auto;
+      top: 50%;
+      transform: translateY(-50%);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+      animation: fadeIn 1.5s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-60%) scale(0.95); }
+      to { opacity: 1; transform: translateY(-50%) scale(1); }
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-weight: 600;
+      color: #333;
+      letter-spacing: 1px;
+    }
+
+    .profile-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #7fa77f;
+      margin: 15px 0 25px 0;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 20px;
+      background: linear-gradient(45deg, #a4c18c, #7fa77f);
+      color: white;
+      font-size: 14px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      box-shadow: 0 4px 10px rgba(253, 252, 252, 0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px) scale(1.03);
+      background: linear-gradient(45deg, #88b177, #5e855d);
+      box-shadow: 0 6px 18px rgba(95, 133, 93, 0.4);
+    }
+
+    .btn:nth-of-type(2) {
+      background: linear-gradient(45deg, #c2bdb5, #b5afa5);
+    }
+
+    .btn:nth-of-type(2):hover {
+      background: linear-gradient(45deg, #a39d95, #948e86);
+    }
+
+    .btn:nth-of-type(3) {
+      background: linear-gradient(45deg, #e0d5c9, #d2c9bb);
+    }
+
+    .btn:nth-of-type(3):hover {
+      background: linear-gradient(45deg, #c0b5a8, #b9b0a5);
+    }
+
+    /* Portfolio Section */
+    #portfolio {
+      padding: 80px 20px;
+      background-color: #f9f9f9;
+      position: relative;
+      z-index: 1;
+    }
+
+    #portfolio h1 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed; 
+      z-index: 10; 
+      padding-top: 60px; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      overflow: auto; 
+      background-color: rgba(0,0,0,0.8);
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 80%;
+      max-height: 80vh;
+      border-radius: 15px;
+      box-shadow: 0 0 25px #000;
+    }
+
+    .close {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    #caption {
+      text-align: center;
+      color: #ccc;
+      padding: 10px 0;
+      font-size: 18px;
+    }
+
+    @media (max-width: 600px) {
+      #portfolio h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        width: 90%;
+        padding: 25px;
+      }
+      .back-btn {
+        width: 90%;
+        max-width: none;
+        margin: 20px auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ปุ่มย้อนกลับไปหน้า index -->
+  <a href="index.html" class="back-btn" aria-label="กลับไปหน้าแรก">← Home</a>
+
+  <!-- พอร์ตโฟลิโอ -->
+  <section id="portfolio">
+    <h1>🎨 My Art Portfolio</h1>
+    <div class="gallery">
+      <!-- ใส่คลาส zoomable เฉพาะภาพที่ต้องการให้ซูมได้ -->
+      <img class="zoomable" src="https://media.discordapp.net/attachments/1119270754551345245/1401687666982125688/image.png?ex=68912edd&is=688fdd5d&hm=7780f2675e23a64b958cc137e5c85aaa7bd9bb342844c76e82dc7a3a267bf113&=&format=webp&quality=lossless" alt="Artwork 1">
+      <img class="zoomable" src="https://media.discordapp.net/attachments/1119270754551345245/1401687667309023344/image.png?ex=68912edd&is=688fdd5d&hm=e3c74aea392e761b0bb926b6e1f6b6c2fd88a536d0973461a1843ddc1461e1d0&=&format=webp&quality=lossless" alt="Artwork 2">
+      <img class="zoomable"  src="https://media.discordapp.net/attachments/1119270754551345245/1401687347204198400/image.png?ex=68912e91&is=688fdd11&hm=83fc2e6c00246dfef46cdd6e024521a679da802bac2c6b09379eb1110b21ac95&=&format=webp&quality=lossless" alt="Artwork 3">
+      <img class="zoomable" src="https://media.discordapp.net/attachments/1119270754551345245/1401687232930381944/patiwat_dujjanuthas.zip_-_6.png?ex=68912e76&is=688fdcf6&hm=bef5aef8f220d7be0cbed4417ed836d8ed72218149c47f1c7cf5e58efa00d11e&=&format=webp&quality=lossless&width=616&height=872" alt="Artwork 4">
+      <img class="zoomable" src="https://media.discordapp.net/attachments/1119270754551345245/1401687233484034218/patiwat_dujjanuthas.zip_-_8.png?ex=68912e76&is=688fdcf6&hm=92dd0de1f9a90eec98aa5f34de2a36e7842fed41ac94de0b1f2ad20f169a3685&=&format=webp&quality=lossless&width=616&height=872" alt="Artwork 5">
+    </div>
+  </section>
+
+  <!-- Modal สำหรับซูมภาพ -->
+  <div id="modal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modal-img" />
+    <div id="caption"></div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modal-img");
+    const captionText = document.getElementById("caption");
+    const closeBtn = document.querySelector(".close");
+
+    // เพิ่ม event ให้ภาพที่มีคลาส zoomable
+    document.querySelectorAll(".zoomable").forEach(img => {
+      img.style.cursor = "zoom-in";
+      img.addEventListener("click", e => {
+        modal.style.display = "block";
+        modalImg.src = img.src;
+        captionText.textContent = img.alt;
+      });
+    });
+
+    // ปิด modal เมื่อคลิกปุ่ม close
+    closeBtn.onclick = () => {
+      modal.style.display = "none";
+    };
+
+    // ปิด modal เมื่อคลิกรอบๆ ภาพ
+    modal.onclick = e => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    };
+  </script>
+
+</body>
+</html>

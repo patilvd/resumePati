@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Artwork - PATI.LVD (ไพ่ในมือ)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #f0f0f0;
+      margin: 0; padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      color: #4a4a4a;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+    }
+
+    .hand {
+      position: relative;
+      width: 960px;   /* ขยายความกว้าง */
+      height: 360px;
+      perspective: 1000px;
+      user-select: none;
+    }
+
+    .card {
+      position: absolute;
+      top: 50%;
+      width: 320px;
+      height: 320px;
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+      overflow: hidden;
+      background: white;
+      transform-origin: bottom center;
+      cursor: pointer;
+      transition: transform 0.7s ease, opacity 0.5s ease;
+      opacity: 1;
+    }
+
+    /* เรียงไพ่เฉียง ซ้าย-ขวา โดยใช้ nth-child */
+    .card:nth-child(1) {
+      left: 40px;   /* เว้นขอบซ้าย */
+      transform: translateY(-50%) rotate(-12deg) scale(0.9);
+      z-index: 1;
+    }
+    .card:nth-child(2) {
+      left: calc(50% - 160px); /* กลางพอดี */
+      transform: translateY(-50%) rotate(0deg) scale(1);
+      z-index: 2;
+    }
+    .card:nth-child(3) {
+      right: 40px;  /* เว้นขอบขวา */
+      transform: translateY(-50%) rotate(12deg) scale(0.9);
+      z-index: 1;
+    }
+
+    /* ซ่อนไพ่ใบที่ 4 ขึ้นไป */
+    .card:nth-child(n+4) {
+      display: none;
+    }
+
+    .card.fade-out {
+      opacity: 0;
+      transform: translateY(-50%) scale(0.8) rotate(0deg);
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .btn-change {
+      margin-top: 40px;
+      padding: 14px 32px;
+      font-size: 16px;
+      font-weight: 600;
+      background: linear-gradient(45deg, #7fa77f, #a4c18c);
+      border: none;
+      border-radius: 24px;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(127, 167, 127, 0.4);
+      transition: background 0.3s ease;
+    }
+
+    .btn-change:hover {
+      background: linear-gradient(45deg, #5e855d, #88b177);
+    }
+
+    /* ปุ่มกลับหน้า index สีขาว */
+    .btn-back {
+      margin-top: 20px;
+      padding: 14px 32px;
+      font-size: 16px;
+      font-weight: 600;
+      background: white;
+      border: 2px solid #ffffff;
+      border-radius: 24px;
+      color: #4a4a4a;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(127, 167, 127, 0.15);
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .btn-back:hover {
+      background: #7fa77f;
+      color: white;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none; /* ซ่อนเริ่มต้น */
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .modal-content {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+      cursor: default;
+    }
+
+    .modal-content img {
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      display: block;
+      user-select: none;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1> Art Work🖌️ </h1>
+
+  <div class="hand" id="hand">
+    <div class="card"><img src="https://media.discordapp.net/attachments/1119270754551345245/1401699363557871627/Screenshot_2025-08-04_034132.png?ex=689139c2&is=688fe842&hm=a665c6e66a7fcfca4bef8d52a75e70ce0e4ae3df63262cfd577c538a94e6c1fd&=&format=webp&quality=lossless" alt="Artwork 1" /></div>
+    <div class="card"><img src="https://media.discordapp.net/attachments/1119270754551345245/1401699363851341986/Screenshot_2025-08-04_034149.png?ex=689139c2&is=688fe842&hm=d6f622d4009d9ff1cd4d440ed92a8d06fa347edce397fc763e1fcef92270e94e&=&format=webp&quality=lossless" alt="Artwork 2" /></div>
+    <div class="card"><img src="https://media.discordapp.net/attachments/1119270754551345245/1401699364128424046/Screenshot_2025-08-04_034235.png?ex=689139c2&is=688fe842&hm=a318ce14685cc81505c6c8305e47f43df574a96186e6f5d20ba1f4777a31bab3&=&format=webp&quality=lossless" alt="Artwork 3" /></div>
+    <div class="card"><img src="https://media.discordapp.net/attachments/1119270754551345245/1401699364388344030/image.png?ex=689139c2&is=688fe842&hm=3d0c03f883523f131db67269af58ca7d1812876922b971ff21aab4159e42dbed&=&format=webp&quality=lossless" alt="Artwork 4" /></div>
+    <div class="card"><img src="https://media.discordapp.net/attachments/1119270754551345245/1401699364686135426/Screenshot_2025-08-04_055134.png?ex=689139c2&is=688fe842&hm=bb94d309d37278aff8dbbae47970a1a22bdd26e21c679dc5633eb4a9c8445172&=&format=webp&quality=lossless" alt="Artwork 5" /></div>
+    <div class="card"><img src="https://media.discordapp.net/attachments/1119270754551345245/1401699365084725403/forneus_1.png?ex=689139c2&is=688fe842&hm=0c82a5bb46ff89cf400ed67b844a0c9c98144f1072650b7a441fe058e242bd91&=&format=webp&quality=lossless&width=340&height=871" alt="Artwork 6" /></div>
+    <div class="card"><img src="https://media.discordapp.net/attachments/1119270754551345245/1401699365579526255/furfur.png?ex=689139c3&is=688fe843&hm=357f4f1ae3eacba199651337b686ddcba536574392c1c93c20dce856b286703e&=&format=webp&quality=lossless&width=340&height=871" alt="Artwork 7" /></div>
+    <div class="card"><img src="https://media.discordapp.net/attachments/1119270754551345245/1401705551401975839/image.png?ex=68913f85&is=688fee05&hm=97fc9445fb5f73deb2bea1d036aa3d235473454d256ddbf8b041384fc3ca50ab&=&format=webp&quality=lossless" alt="Artwork 8" /></div>
+    <div class="card"><img src="https://media.discordapp.net/attachments/1119270754551345245/1401705647606595605/image.png?ex=68913f9c&is=688fee1c&hm=da4843e137dd7db1f27a4111f2792d328de14c08c82d9490deb1721e76b3776b&=&format=webp&quality=lossless" alt="Artwork 9" /></div>
+  </div>
+
+  <button class="btn-change" id="changeBtn">เปลี่ยนชุดภาพ</button>
+  <button class="btn-back" id="backBtn">Home</button>
+
+  <!-- Modal สำหรับแสดงภาพใหญ่ -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <img src="" alt="Expanded Artwork" id="modalImage" />
+    </div>
+  </div>
+
+  <script>
+    const hand = document.getElementById('hand');
+    const changeBtn = document.getElementById('changeBtn');
+    const backBtn = document.getElementById('backBtn');
+    const cards = hand.querySelectorAll('.card');
+
+    const modal = document.getElementById('modal');
+    const modalImage = document.getElementById('modalImage');
+
+    // ชุดภาพ 3 ชุด (เพิ่มได้ตามต้องการ)
+    const imagesSets = [
+      [
+        "https://media.discordapp.net/attachments/1119270754551345245/1401699364388344030/image.png?ex=689139c2&is=688fe842&hm=3d0c03f883523f131db67269af58ca7d1812876922b971ff21aab4159e42dbed&=&format=webp&quality=lossless",
+        "https://media.discordapp.net/attachments/1119270754551345245/1401699364686135426/Screenshot_2025-08-04_055134.png?ex=689139c2&is=688fe842&hm=bb94d309d37278aff8dbbae47970a1a22bdd26e21c679dc5633eb4a9c8445172&=&format=webp&quality=lossless",
+        "https://media.discordapp.net/attachments/1119270754551345245/1401699365084725403/forneus_1.png?ex=689139c2&is=688fe842&hm=0c82a5bb46ff89cf400ed67b844a0c9c98144f1072650b7a441fe058e242bd91&=&format=webp&quality=lossless&width=340&height=871",
+      ],
+      [
+        "https://media.discordapp.net/attachments/1119270754551345245/1401699365579526255/furfur.png?ex=689139c3&is=688fe843&hm=357f4f1ae3eacba199651337b686ddcba536574392c1c93c20dce856b286703e&=&format=webp&quality=lossless&width=340&height=871",
+        "https://media.discordapp.net/attachments/1119270754551345245/1401705551401975839/image.png?ex=68913f85&is=688fee05&hm=97fc9445fb5f73deb2bea1d036aa3d235473454d256ddbf8b041384fc3ca50ab&=&format=webp&quality=lossless",
+        "https://media.discordapp.net/attachments/1119270754551345245/1401705647606595605/image.png?ex=68913f9c&is=688fee1c&hm=da4843e137dd7db1f27a4111f2792d328de14c08c82d9490deb1721e76b3776b&=&format=webp&quality=lossless",
+      ],
+      [
+       "https://media.discordapp.net/attachments/1119270754551345245/1401699363557871627/Screenshot_2025-08-04_034132.png?ex=689139c2&is=688fe842&hm=a665c6e66a7fcfca4bef8d52a75e70ce0e4ae3df63262cfd577c538a94e6c1fd&=&format=webp&quality=lossless",
+       "https://media.discordapp.net/attachments/1119270754551345245/1401699363851341986/Screenshot_2025-08-04_034149.png?ex=689139c2&is=688fe842&hm=d6f622d4009d9ff1cd4d440ed92a8d06fa347edce397fc763e1fcef92270e94e&=&format=webp&quality=lossless",
+       "https://media.discordapp.net/attachments/1119270754551345245/1401699364128424046/Screenshot_2025-08-04_034235.png?ex=689139c2&is=688fe842&hm=a318ce14685cc81505c6c8305e47f43df574a96186e6f5d20ba1f4777a31bab3&=&format=webp&quality=lossless",
+      ],
+    ];
+
+    let currentSet = 0;
+
+    function changeImages() {
+      // Fade out ไพ่ก่อน
+      cards.forEach((card, index) => {
+        if(index < 3) card.classList.add('fade-out');
+      });
+
+      // รอ 700ms เพื่อให้แอนิเมชัน fade out เล่นจบ
+      setTimeout(() => {
+        currentSet = (currentSet + 1) % imagesSets.length;
+
+        // เปลี่ยนภาพในไพ่แต่ละใบ (แค่ 3 ใบแรก)
+        imagesSets[currentSet].forEach((src, i) => {
+          cards[i].querySelector('img').src = src;
+        });
+
+        // Fade in ไพ่
+        cards.forEach((card, index) => {
+          if(index < 3) card.classList.remove('fade-out');
+        });
+      }, 700);
+    }
+
+    changeBtn.addEventListener('click', changeImages);
+
+    backBtn.addEventListener('click', () => {
+      window.location.href = 'index.html';
+    });
+
+    // เปิด modal เมื่อคลิกที่ไพ่
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const imgSrc = card.querySelector('img').src;
+        modalImage.src = imgSrc;
+        modal.style.display = 'flex';
+        // ป้องกัน scroll background เมื่อ modal เปิด
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    // ปิด modal เมื่อคลิกนอกภาพ
+    modal.addEventListener('click', (e) => {
+      if(e.target === modal || e.target === modalImage) {
+        modal.style.display = 'none';
+        modalImage.src = '';
+        document.body.style.overflow = '';
+      }
+    });
+
+    // กด ESC ปิด modal
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape' && modal.style.display === 'flex') {
+        modal.style.display = 'none';
+        modalImage.src = '';
+        document.body.style.overflow = '';
+      }
+    });
+
+  </script>
+
+</body>
+</html>

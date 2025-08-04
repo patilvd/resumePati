@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PATI.LVD - Artist Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ... (เดิมเหมือนที่คุณส่งมา) ... */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Outfit', sans-serif;
+      overflow: hidden;
+    }
+
+    body {
+      background: url('https://media.discordapp.net/attachments/1119270754551345245/1401685005058445519/image.png?ex=68912c63&is=688fdae3&hm=dea6ee87cf9aa6a6d6d94e167a0dc02a88de20cd7150c4176e284fa1ba7be8f5&=&format=webp&quality=lossless') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(3px);
+      z-index: 0;
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      background: #ffffffdd;
+      border-radius: 24px;
+      width: 360px;
+      padding: 40px 30px;
+      text-align: center;
+      margin: auto;
+      top: 50%;
+      transform: translateY(-50%);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+      animation: fadeIn 1.5s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-60%) scale(0.95); }
+      to { opacity: 1; transform: translateY(-50%) scale(1); }
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-weight: 600;
+      color: #333;
+      letter-spacing: 1px;
+    }
+
+    .profile-img {
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 25px 0 35px 0;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      margin: 12px 0;
+      border: none;
+      border-radius: 20px;
+      background: linear-gradient(45deg, #a4c18c, #7fa77f);
+      color: white;
+      font-size: 16px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.4s ease;
+      box-shadow: 0 4px 10px rgba(127, 167, 127, 0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px) scale(1.03);
+      background: linear-gradient(45deg, #88b177, #5e855d);
+      box-shadow: 0 6px 18px rgba(95, 133, 93, 0.4);
+    }
+
+    .btn:nth-of-type(2) {
+      background: linear-gradient(45deg, #c2bdb5, #b5afa5);
+    }
+
+    .btn:nth-of-type(2):hover {
+      background: linear-gradient(45deg, #a39d95, #948e86);
+    }
+
+    .btn:nth-of-type(3) {
+      background: linear-gradient(45deg, #e0d5c9, #d2c9bb);
+    }
+
+    .btn:nth-of-type(3):hover {
+      background: linear-gradient(45deg, #c0b5a8, #b9b0a5);
+    }
+
+    /* Rainbow Loader */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .dot-container {
+      display: flex;
+      gap: 12px;
+    }
+
+    .dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    .dot:nth-child(1) { background: red; animation-delay: 0s; }
+    .dot:nth-child(2) { background: orange; animation-delay: 0.1s; }
+    .dot:nth-child(3) { background: yellow; animation-delay: 0.2s; }
+    .dot:nth-child(4) { background: green; animation-delay: 0.3s; }
+    .dot:nth-child(5) { background: blue; animation-delay: 0.4s; }
+    .dot:nth-child(6) { background: indigo; animation-delay: 0.5s; }
+    .dot:nth-child(7) { background: violet; animation-delay: 0.6s; }
+
+    @keyframes spin {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.6); opacity: 0.6; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .socials {
+      margin-top: 1px;
+      font-size: 25px;
+      color: #444;
+    }
+
+    .socials p {
+      margin: 4px 0;
+    }
+
+    .socials a {
+      color: #2b2b2b;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .socials a:hover {
+      color: #0077cc;
+    }
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Loader -->
+  <div id="loader">
+    <div class="dot-container">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+
+  <!-- Card -->
+  <div class="card">
+    <h2>PATI.LVD</h2>
+    <img src="https://media.discordapp.net/attachments/1119270754551345245/1401684068281876480/IMG_3137.PNG?ex=68912b83&is=688fda03&hm=2f9e0de35fcad59087a626922ac95dcb0c7c7cea4f59ba1ac937a81412371812&=&format=webp&quality=lossless&width=551&height=976" alt="profile" class="profile-img">
+    <!-- ส่วน Socials -->
+<div class="socials">
+  <p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 20px; vertical-align: middle; margin-right: 8px;">
+    <a href="https://www.instagram.com/pati.lvd?igsh=NWU3ajJrM2ljdTU1&utm_source=qr" target="_blank">pati.lvd</a>
+  </p>
+  <p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Facebook_icon.svg" alt="Facebook" style="width: 20px; vertical-align: middle; margin-right: 8px;">
+    <a href="https://www.facebook.com/patiwat.dujjanuthas?mibextid=wwXIfr&rdid=67CyWWPd3mSyRjoo&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19Tnqtk96S%2F%3Fmibextid%3DwwXIfr#" target="_blank">patiwat dujjanuthas</a>
+  </p>
+</div>
+    <button class="btn" onclick="navigateWithLoader('portfolio.html')">📁 PORTFOLIO</button>
+    <button class="btn" onclick="navigateWithLoader('profile.html')">🔗 PROFILE</button>
+    <button class="btn" onclick="navigateWithLoader('artwork.html')">🎨 ART WORK</button>
+  </div>
+
+
+  <script>
+    function navigateWithLoader(url) {
+      const loader = document.getElementById('loader');
+      loader.style.display = 'flex';
+      setTimeout(() => {
+        window.location.href = url;
+      }, 900);
+    }
+  </script>
+
+</body>
+</html>
